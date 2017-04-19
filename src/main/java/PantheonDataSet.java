@@ -12,6 +12,7 @@ import java.util.ArrayList;
 public class PantheonDataSet {
 
     private ArrayList<HistoricalFigure> dataset;
+    private int numberOfRecords = 0;
 
     public PantheonDataSet(String filename) {
 
@@ -23,6 +24,17 @@ public class PantheonDataSet {
             br = new BufferedReader(new FileReader(filename));
             while ((line = br.readLine()) != null) {
                 String[] readData = line.split(",");
+                numberOfRecords++;
+
+                if(!readData[0].matches("^-?\\d+$")) readData[0]="0";
+                if(!readData[3].matches("^-?\\d+$")) readData[3]="0";
+                if(!readData[8].matches("^-?\\d+$")) readData[8]="0";
+                if(!readData[9].matches("^-?\\d+$")) readData[9]="0";
+                if(!readData[13].matches("^-?\\d+$")) readData[13]="0";
+                if(!readData[14].matches("^-?\\d+$")) readData[14]="0";
+                if(!readData[15].matches("^-?\\d+$")) readData[15]="0";
+                if(!readData[16].matches("^-?\\d+$")) readData[16]="0";
+
                 HistoricalFigure h = new HistoricalFigure.HistoricalFigureBuilder()
                         .article_id(Integer.parseInt(readData[0]))
                         .full_name(readData[1])
@@ -42,6 +54,7 @@ public class PantheonDataSet {
                         .average_views(Integer.parseInt(readData[15]))
                         .historical_popularity_index(Double.parseDouble(readData[16]))
                         .build();
+                        System.out.println("Added " + h.getFull_name());
             }
         } catch (FileNotFoundException e) {
             System.out.println("File not found.");
@@ -59,5 +72,9 @@ public class PantheonDataSet {
                 }
             }
         }
+    }
+
+    public int getNumberOfRecords() {
+        return numberOfRecords;
     }
 }
