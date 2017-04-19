@@ -1,7 +1,7 @@
 package main.java;
 
 /**
- * Created by chris on 4/17/17.
+ * Constructs a HistoricalFigure
  */
 public class HistoricalFigureBuilder {
 
@@ -22,11 +22,6 @@ public class HistoricalFigureBuilder {
     private int _page_views;
     private int _average_views;
     private double _historical_popularity_index;
-
-    public HistoricalFigureBuilder x(String _x) {
-        this._x = _x;
-        return this;
-    }
 
     public HistoricalFigureBuilder article_id(int _article_id ) {
         this._article_id = _article_id;
@@ -78,22 +73,60 @@ public class HistoricalFigureBuilder {
         return this;
     }
 
-    public HistoricalFigureBuilder x(String _x) {
-        this._x = _x;
+    public HistoricalFigureBuilder occupation(String _occupation) {
+        this._occupation = _occupation;
         return this;
     }
 
-    public HistoricalFigureBuilder x(String _x) {
-        this._x = _x;
+    public HistoricalFigureBuilder industry(String _industry) {
+        this._industry = _industry;
         return this;
     }
 
-    public HistoricalFigureBuilder x(String _x) {
-        this._x = _x;
+    public HistoricalFigureBuilder domain(String _domain) {
+        this._domain = _domain;
         return this;
     }
 
+    public HistoricalFigureBuilder article_languages(int _article_languages) {
+        this._article_languages = _article_languages;
+        return this;
+    }
 
+    public HistoricalFigureBuilder page_views(int _page_views) {
+        this._page_views = _page_views;
+        return this;
+    }
 
+    public HistoricalFigureBuilder average_views(int _average_views) {
+        this._average_views = _average_views;
+        return this;
+    }
 
+    public HistoricalFigureBuilder historical_popularity_index(double _historical_popularity_index) {
+        this._historical_popularity_index = _historical_popularity_index;
+        return this;
+    }
+
+    public HistoricalFigure build() {
+        return new HistoricalFigure(
+                _article_id,
+                _full_name,
+                _sex,
+                _birth_year,
+                _city,
+                _state,
+                _country,
+                _continent,
+                _latitude,
+                _longitude,
+                _occupation,
+                _industry,
+                _domain,
+                _article_languages,
+                _page_views,
+                _average_views,
+                _historical_popularity_index
+        );
+    }
 }
