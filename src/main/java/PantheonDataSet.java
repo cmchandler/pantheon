@@ -5,26 +5,45 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Random;
 
 /**
  * PantheonDataSet: holds the main data
  */
 public class PantheonDataSet {
 
+    // The data
     private ArrayList<HistoricalFigure> dataset;
-    private int numberOfRecords = 0;
 
+    // The number of records
+    private int numberOfRecords;
+
+    /**
+     * Constructor if you already have a dataset
+     * @param dataset the data to add
+     */
+    public PantheonDataSet(ArrayList<HistoricalFigure> dataset) {
+        this.dataset = dataset;
+        this.numberOfRecords = dataset.size();
+    }
+
+    /**
+     * Reads from a csv with passed filename and loads into new object
+     * @param filename the csv file to load
+     */
     public PantheonDataSet(String filename) {
 
         dataset = new ArrayList<>();
+        numberOfRecords = 0;
         BufferedReader br = null;
         String line = "";
 
+        // Load all data into object from file
         try {
             br = new BufferedReader(new FileReader(filename));
             while ((line = br.readLine()) != null) {
                 String[] readData = line.split(",");
-                numberOfRecords++;
 
                 if(!readData[0].matches("^-?\\d+$")) readData[0]="0";
                 if(!readData[3].matches("^-?\\d+$")) readData[3]="0";
@@ -54,8 +73,10 @@ public class PantheonDataSet {
                         .average_views(Integer.parseInt(readData[15]))
                         .historical_popularity_index(Double.parseDouble(readData[16]))
                         .build();
-                        System.out.println("Added " + h.getFull_name());
+                        //System.out.println("Added " + h.getFull_name());
+                dataset.add(h);
             }
+            numberOfRecords = dataset.size();
         } catch (FileNotFoundException e) {
             System.out.println("File not found.");
             e.printStackTrace();
@@ -74,7 +95,45 @@ public class PantheonDataSet {
         }
     }
 
+    /**
+     * @return number of records this object contains
+     */
     public int getNumberOfRecords() {
         return numberOfRecords;
+    }
+
+    /**
+     * Splits the data randomly into 3/10 and returns the test data.  Removes these records from the object.
+     * @return the PantheonDataSet containing all of the randomly selected records.
+     */
+    public PantheonDataSet splitTestData() {
+
+        Random r = new Random(System.currentTimeMillis());
+
+        ArrayList<HistoricalFigure> testData = new ArrayList<>();
+
+        for(int i = 0; i < dataset.size(); i++) {
+            if(r.nextInt(9)>6) {
+                testData.add(dataset.get(i));
+                dataset.remove(i);
+            }
+        }
+        numberOfRecords = dataset.size();
+
+        return new PantheonDataSet(testData);
+    }
+
+    /**
+     * Finds historical figure by full_name field
+     * @param name the name to search for
+     * @return the HistoricalFigure if found or null if not
+     */
+    public HistoricalFigure find(String name) {
+        for (int i = 0; i < dataset.size(); i++) {
+            if(dataset.get(i).getFull_name().equals(name)) {
+                return dataset.get(i);
+            }
+        }
+        return null;
     }
 }
