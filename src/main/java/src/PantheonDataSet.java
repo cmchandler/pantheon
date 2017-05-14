@@ -1,11 +1,10 @@
-package main.java;
+package main.java.src;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import org.apache.commons.csv.CSVFormat;
+import org.apache.commons.csv.CSVPrinter;
+
+import java.io.*;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Random;
 
 /**
@@ -102,6 +101,7 @@ public class PantheonDataSet {
         return numberOfRecords;
     }
 
+
     /**
      * Splits the data randomly into 3/10 and returns the test data.  Removes these records from the object.
      * @return the PantheonDataSet containing all of the randomly selected records.
@@ -136,4 +136,38 @@ public class PantheonDataSet {
         }
         return null;
     }
+
+    PantheonDataSet p;
+    FileWriter fw = null;
+    CSVPrinter csvp = null;
+
+    private static final Object[] FILE_HEADER =
+            {"article_id","full_name","sex","birth_year","city","state",
+                    "country", "continent","latitude","longitude","occupation",
+                    "industry","domain","article_languages","page_views",
+                    "average_views","historical_popularity_index"};
+
+
+    public void write(String filename) {
+        CSVFormat csvFileFormat = CSVFormat.DEFAULT.withRecordSeparator("\n");
+        try {
+            fw = new FileWriter(filename);
+            csvp = new CSVPrinter(fw,csvFileFormat);
+
+            // print header
+            csvp.printRecord(FILE_HEADER);
+
+            for(int i = 0; i < dataset.size(); i++) {
+                csvp.printRecord(dataset.get(i).getData());
+            }
+            fw.flush();
+            fw.close();
+            csvp.close();
+        } catch (Exception e) {
+            System.out.println("Problem writing to file " + filename);
+        }
+
+    }
 }
+
+

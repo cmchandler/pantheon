@@ -1,4 +1,4 @@
-package main.java;
+package main.java.src;
 
 /**
  * HistoricalFigure: represents a historical figure data point from the Pantheon data set
@@ -137,7 +137,7 @@ public class HistoricalFigure {
         private int _average_views;
         private double _historical_popularity_index;
 
-        public HistoricalFigureBuilder article_id(int _article_id ) {
+        public HistoricalFigureBuilder article_id(int _article_id) {
             this._article_id = _article_id;
             return this;
         }
@@ -148,7 +148,7 @@ public class HistoricalFigure {
         }
 
         public HistoricalFigureBuilder sex(String _sex) {
-            this._sex= _sex;
+            this._sex = _sex;
             return this;
         }
 
@@ -223,8 +223,62 @@ public class HistoricalFigure {
         }
 
         public HistoricalFigure build() {
-           HistoricalFigure figure = new HistoricalFigure(this);
-           return figure;
+            HistoricalFigure figure = new HistoricalFigure(this);
+            return figure;
         }
     }
+
+    public Object[] getData() {
+        String[] data = {
+        Integer.toString(article_id),
+        full_name,
+        sex,
+        Integer.toString(birth_year),
+        city,
+        state,
+        country,
+        continent,
+        Double.toString(latitude),
+        Double.toString(longitude),
+        occupation,
+        industry,
+        domain,
+        Integer.toString(article_languages),
+        Integer.toString(page_views),
+        Integer.toString(average_views),
+        Double.toString(historical_popularity_index)
+        };
+
+        //clean characters Weka doesn't like
+        for(int i = 0; i < data.length; i++) {
+
+            String s = data[i];
+
+           s.replace("\"","");
+
+            data[i].replaceAll("^\"|'\"$`", "");
+
+            if(data[i].contains("\"")) {
+                data[i].replace("\"","");
+                data[i] = "";
+            }
+
+            if(data[i].contains("'")) {
+                data[i] = "";
+            }
+
+            if(data[i]==null) {
+                data[i] = "";
+            }
+        }
+
+
+
+        return data;
+    }
+
+    private void clean() {
+
+    }
+
 }
