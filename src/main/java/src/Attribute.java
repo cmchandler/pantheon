@@ -1,6 +1,7 @@
 package main.java.src;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -12,19 +13,25 @@ import static main.java.src.PantheonDataSet.dataset;
 public class Attribute {
 
     public String name;
-    ArrayList<Classification> classifications;
+    HashMap<String, Integer> classifications;
 
     public Attribute() {
+        classifications = new HashMap<String, Integer>();
+    }
 
-        classifications = new ArrayList<Classification>();
+    public Integer getValue(String s){
+        return classifications.get(s) ;
+    }
 
-        }
-
-    public add(Classification c) {
-       for(int i = 0; i < classifications.size(); i++) {
-           if(classifications.)
+    public void add(String s){
+       if(classifications.containsKey(s)){
+            Integer temp = classifications.get(s) ;
+           classifications.put(s, temp+1) ;
+       }
+       else{
+           classifications.put(s, 1);
        }
     }
-    }
+}
 
 
