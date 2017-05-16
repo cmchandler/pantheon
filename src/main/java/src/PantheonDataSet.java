@@ -154,15 +154,15 @@ public class PantheonDataSet {
             String industry = dataset.get(i).getIndustry();
 
             cityAttr.add(city) ;
-            cityAttr.add(city) ;
-            cityAttr.add(city) ;
-            cityAttr.add(city) ;
-            cityAttr.add(city) ;
-            cityAttr.add(city) ;
-            cityAttr.add(city) ;
-            cityAttr.add(city) ;
-            cityAttr.add(city) ;
-            cityAttr.add(city) ;
+            countryAttr.add(country) ;
+            continentAttr.add(continent) ;
+            pageViewsAttr.add(pageViews) ;
+            avgViewsAttr.add(avgViews) ;
+            languagesAttr.add(langages) ;
+            domainAttr.add(domain) ;
+            sexAttr.add(sex) ;
+            occupationAttr.add(occupation) ;
+            industryAttr.add(industry) ;
 
         }
 
