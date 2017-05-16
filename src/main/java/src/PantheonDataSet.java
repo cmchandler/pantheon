@@ -133,7 +133,7 @@ public class PantheonDataSet {
             industryAttr.add(industry) ;
         }
 
-       
+        domainAttr.getEntropy(dataset.size());
     }
 
     /**
