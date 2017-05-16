@@ -1,9 +1,6 @@
 package main.java.src;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 import static main.java.src.PantheonDataSet.dataset;
 
@@ -14,6 +11,7 @@ public class Attribute {
 
     public String name;
     HashMap<String, Integer> classifications;
+    int numEntries;
 
     public Attribute() {
         classifications = new HashMap<String, Integer>();
@@ -33,8 +31,22 @@ public class Attribute {
        }
     }
 
+<<<<<<< HEAD
 
 
+=======
+    public double getEntropy(int totalPeople){
+        double result = 0.0;
+        Iterator it = classifications.entrySet().iterator();
+        while (it.hasNext()) {
+            Map.Entry pair = (Map.Entry)it.next();
+            double ratio = (double) pair.getValue() / (double) totalPeople;
+            double log2 = Math.log10(ratio)/Math.log10(2);
+            result += (-1) * (ratio) * (log2);
+        }
+        return result;
+    }
+>>>>>>> origin/master
 }
 
 
