@@ -5,13 +5,17 @@ import org.apache.commons.csv.CSVPrinter;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Random;
 import java.util.Set;
+
 
 /**
  * PantheonDataSet: holds the main data
  */
 public class PantheonDataSet {
+
+    private final int NUMBEROFATTR = 10;
 
     // The data
     public static ArrayList<HistoricalFigure> dataset;
@@ -92,6 +96,76 @@ public class PantheonDataSet {
                 }
             }
         }
+                /*
+        ArrayList<HashMap<String,Integer>> attributes = new ArrayList<>();
+
+        HashMap<String,Integer> city = new HashMap<>();
+        attributes.add(city);
+
+        HashMap<String,Integer> country = new HashMap<>();
+        attributes.add(country);
+
+        HashMap<String,Integer> continent = new HashMap<>();
+        attributes.add(continent);
+
+        HashMap<String,Integer> pageViews = new HashMap<>();
+        attributes.add(pageViews);
+
+        HashMap<String,Integer> avgViews = new HashMap<>();
+        attributes.add(avgViews);
+
+        HashMap<String,Integer> languages = new HashMap<>();
+        attributes.add(languages);
+
+        HashMap<String,Integer> domain = new HashMap<>();
+        attributes.add(domain);
+
+        HashMap<String,Integer> industry = new HashMap<>();
+        attributes.add(industry);
+
+        HashMap<String,Integer> sex = new HashMap<>();
+        attributes.add(sex);
+
+        HashMap<String,Integer> occupation = new HashMap<>();
+        attributes.add(occupation);
+  */
+        Attribute cityAttr = new Attribute();
+        Attribute countryAttr = new Attribute();
+        Attribute continentAttr = new Attribute();
+        Attribute pageViewsAttr = new Attribute();
+        Attribute avgViewsAttr = new Attribute();
+        Attribute languagesAttr = new Attribute();
+        Attribute domainAttr = new Attribute();
+        Attribute sexAttr = new Attribute();
+        Attribute occupationAttr = new Attribute();
+        Attribute industryAttr = new Attribute();
+
+        for(int i = 0; i < dataset.size()-1;i++) {//each person
+
+            String city = dataset.get(i).getCity();
+            String country = dataset.get(i).getCountry();
+            String continent = dataset.get(i).getContinent();
+            String pageViews = Integer.toString(dataset.get(i).getPage_views());
+            String avgViews = Integer.toString(dataset.get(i).getAverage_views());
+            String langages = Integer.toString(dataset.get(i).getArticle_languages());;
+            String domain = dataset.get(i).getDomain();
+            String sex = dataset.get(i).getSex();
+            String occupation = dataset.get(i).getOccupation();
+            String industry = dataset.get(i).getIndustry();
+
+            cityAttr.add(city) ;
+            cityAttr.add(city) ;
+            cityAttr.add(city) ;
+            cityAttr.add(city) ;
+            cityAttr.add(city) ;
+            cityAttr.add(city) ;
+            cityAttr.add(city) ;
+            cityAttr.add(city) ;
+            cityAttr.add(city) ;
+            cityAttr.add(city) ;
+
+        }
+
     }
 
     /**
