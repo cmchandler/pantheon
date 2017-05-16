@@ -36,10 +36,10 @@ public class Attribute {
         Iterator it = classifications.entrySet().iterator();
         while (it.hasNext()) {
             Map.Entry pair = (Map.Entry)it.next();
-
+            System.out.println("Key: " + pair.getKey() + "\nValue: " + pair.getValue());
+            
             Integer numberInClass = (Integer) pair.getValue();
             double num = numberInClass.doubleValue();
-
 
             double ratio = num / (double) totalPeople;
             System.out.println("Ratio: " + ratio);
