@@ -25,13 +25,16 @@ public class Attribute {
 
     public void add(String s){
        if(classifications.containsKey(s)){
-            Integer temp = classifications.get(s) ;
+           Integer temp = classifications.get(s) ;
            classifications.put(s, temp+1) ;
        }
        else{
            classifications.put(s, 1);
        }
     }
+
+
+
 }
 
 

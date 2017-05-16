@@ -13,7 +13,7 @@ public class WekaTestMain {
 
         // Load file
         System.out.println("Loading...");
-        PantheonDataSet p = new PantheonDataSet("database.csv");
+        PantheonDataSet p = new PantheonDataSet("");
         System.out.println("Loaded " + p.getNumberOfRecords() + " records.");
 
         // Split file
@@ -29,9 +29,9 @@ public class WekaTestMain {
         // Evaluate
         System.out.println("Evaluating for metric L.");
         WekaData training = new WekaData();
-        training.readFile("training.csv", 13);
+        training.readFile("main/java/training.csv", 13);
         WekaData test = new WekaData();
-        test.readFile("test.csv", 13);
+        test.readFile("main/java/test.csv", 13);
 
         System.out.println("Running...\n");
         WekaTree mine = new WekaTree(training,test);

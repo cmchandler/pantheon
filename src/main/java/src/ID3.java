@@ -7,8 +7,4 @@ import java.util.List;
  */
 public class ID3 {
 
-    private double entropy(List<HistoricalFigure> subset) {
-        return 0;
-    }
-
 }

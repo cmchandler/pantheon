@@ -1,14 +1,18 @@
 package main.java.src;
 
+//import main.java.src.PantheonDataSet;
+//import main.java.src.WekaData;
+
+import java.io.File;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Scanner;
 
 /**
  * Created by chris on 4/19/17.
  */
 public class PantheonMain {
-    public static void main(String[] args) {
-
-        Scanner s = new Scanner(System.in);
+    public static void main(String[] args) throws Exception{
 
         System.out.println("Loading...");
         PantheonDataSet p = new PantheonDataSet("database.csv");
@@ -23,11 +27,6 @@ public class PantheonMain {
         System.out.println("Writing Test set to file...");
         t.write("test.csv");
 
-        System.out.println("Attempting to start Weka instance...");
-        WekaData pw = new WekaData();
-        System.out.print("Filename to load: ");
-        String input = s.nextLine();
-        pw.readFile(input,2);
-        System.out.println("Done.");
+
     }
 }

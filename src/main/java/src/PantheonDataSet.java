@@ -96,39 +96,7 @@ public class PantheonDataSet {
                 }
             }
         }
-                /*
-        ArrayList<HashMap<String,Integer>> attributes = new ArrayList<>();
 
-        HashMap<String,Integer> city = new HashMap<>();
-        attributes.add(city);
-
-        HashMap<String,Integer> country = new HashMap<>();
-        attributes.add(country);
-
-        HashMap<String,Integer> continent = new HashMap<>();
-        attributes.add(continent);
-
-        HashMap<String,Integer> pageViews = new HashMap<>();
-        attributes.add(pageViews);
-
-        HashMap<String,Integer> avgViews = new HashMap<>();
-        attributes.add(avgViews);
-
-        HashMap<String,Integer> languages = new HashMap<>();
-        attributes.add(languages);
-
-        HashMap<String,Integer> domain = new HashMap<>();
-        attributes.add(domain);
-
-        HashMap<String,Integer> industry = new HashMap<>();
-        attributes.add(industry);
-
-        HashMap<String,Integer> sex = new HashMap<>();
-        attributes.add(sex);
-
-        HashMap<String,Integer> occupation = new HashMap<>();
-        attributes.add(occupation);
-  */
         Attribute cityAttr = new Attribute();
         Attribute countryAttr = new Attribute();
         Attribute continentAttr = new Attribute();
@@ -163,9 +131,9 @@ public class PantheonDataSet {
             sexAttr.add(sex) ;
             occupationAttr.add(occupation) ;
             industryAttr.add(industry) ;
-
         }
 
+        city.
     }
 
     /**
