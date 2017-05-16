@@ -73,7 +73,6 @@ public class HistoricalFigure {
         return country;
     }
 
-
     public String getContinent() {
         return continent;
     }

@@ -6,6 +6,7 @@ import org.apache.commons.csv.CSVPrinter;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.Set;
 
 /**
  * PantheonDataSet: holds the main data
@@ -13,18 +14,17 @@ import java.util.Random;
 public class PantheonDataSet {
 
     // The data
-    private ArrayList<HistoricalFigure> dataset;
+    public static ArrayList<HistoricalFigure> dataset;
 
     // The number of records
     private int numberOfRecords;
 
     /**
      * Constructor if you already have a dataset
-     * @param dataset the data to add
+     * @param d the data to add
      */
-    public PantheonDataSet(ArrayList<HistoricalFigure> dataset) {
-        this.dataset = dataset;
-        this.numberOfRecords = dataset.size();
+    public PantheonDataSet(ArrayList<HistoricalFigure> d) {
+        dataset = d;
     }
 
     /**
@@ -166,8 +166,30 @@ public class PantheonDataSet {
         } catch (Exception e) {
             System.out.println("Problem writing to file " + filename);
         }
-
     }
+
+    // needs how many classes, number in each class
+
+    private int article_id;
+    private String full_name;
+    private Set<String> sex;//# of classes
+    private int birth_year;
+    private Set<String> city;
+    private Set<String> state;
+    private Set<String> country;
+    private Set<String> continent;
+    private double latitude;
+    private double longitude;
+    private Set<String> occupation;
+    private Set<String> industry;
+    private Set<String> domain;
+    private int article_languages;
+    private int page_views;
+    private int average_views;
+    private double historical_popularity_index;
+
+    Set<Attribute> attributes;
+
 }
 
 
