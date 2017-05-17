@@ -33,19 +33,21 @@ public class Attribute {
 
     public double getEntropy(int totalPeople){
         double result = 0.0;
-        Iterator it = classifications.entrySet().iterator();
-        while (it.hasNext()) {
-            Map.Entry pair = (Map.Entry)it.next();
-            System.out.println("Key: " + pair.getKey() + "\nValue: " + pair.getValue());
-            
-            Integer numberInClass = (Integer) pair.getValue();
+
+        for(Map.Entry<String, Integer> entry : classifications.entrySet()){
+            String kei = (String) entry.getKey() ;
+            Integer numberInClass = (Integer) entry.getValue();
+
+            System.out.println("Key: " + kei);
+            System.out.println("Val: " + numberInClass);
+
             double num = numberInClass.doubleValue();
 
             double ratio = num / (double) totalPeople;
             System.out.println("Ratio: " + ratio);
             System.out.println("Total people: ");
 
-            double log2 = Math.log(ratio)/Math.log10(2);
+            double log2 = Math.log10(ratio)/Math.log10(2);
             System.out.println("Log2: " + log2);
 
             result += ((-1) * (ratio) * (log2));
@@ -53,7 +55,6 @@ public class Attribute {
             System.out.println("Number of instances in this class: " + num);
             System.out.println("Total people: " + (double) totalPeople);
             System.out.println("Result: " + result);
-
         }
         return result;
     }
