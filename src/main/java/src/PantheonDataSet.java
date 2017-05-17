@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
 import java.util.Set;
+import java.util.jar.Attributes;
 
 
 /**
@@ -16,13 +17,18 @@ import java.util.Set;
 public class PantheonDataSet {
 
     private final int NUMBEROFATTR = 10;
+    PantheonDataSet p;
+    FileWriter fw = null;
+    CSVPrinter csvp = null;
 
     // The data
-    public static ArrayList<HistoricalFigure> dataset;
+    public ArrayList<HistoricalFigure> dataset;
 
     // The number of records
     private int numberOfRecords;
 
+    ArrayList<Attribute> attributeList;
+    Attribute target;
     /**
      * Constructor if you already have a dataset
      * @param d the data to add
@@ -41,6 +47,7 @@ public class PantheonDataSet {
         numberOfRecords = 0;
         BufferedReader br = null;
         String line = "";
+
 
         // Load all data into object from file
         try {
@@ -133,7 +140,36 @@ public class PantheonDataSet {
             industryAttr.add(industry) ;
         }
 
-        domainAttr.getEntropy(dataset.size());
+        attributeList = new ArrayList<>();
+        attributeList.add(cityAttr);
+        attributeList.add(countryAttr);
+        attributeList.add(continentAttr);
+        attributeList.add(pageViewsAttr);
+        attributeList.add(avgViewsAttr);
+        attributeList.add(languagesAttr);
+        attributeList.add(domainAttr);
+        attributeList.add(sexAttr);
+        attributeList.add(occupationAttr);
+        attributeList.add(industryAttr);
+
+        //industryAttr.getEntropy(dataset.size());
+
+        //#####################################################################################
+        target = occupationAttr;
+        //#####################################################################################
+
+        for(int i = 0; i < attributeList.size()-1;i++) {
+            System.out.print("Info gain: ");
+            ID3.getGain(attributeList.get(i),occupationAttr,dataset.size());
+            System.out.print("\n");
+        }
+    }
+
+    /**
+     *
+     */
+    public Attribute getTarget() {
+        return target;
     }
 
     /**
@@ -143,6 +179,12 @@ public class PantheonDataSet {
         return numberOfRecords;
     }
 
+    /**
+     *
+     */
+    public ArrayList<Attribute> getAttributes() {
+        return attributeList;
+    }
 
     /**
      * Splits the data randomly into 3/10 and returns the test data.  Removes these records from the object.
@@ -179,17 +221,20 @@ public class PantheonDataSet {
         return null;
     }
 
-    PantheonDataSet p;
-    FileWriter fw = null;
-    CSVPrinter csvp = null;
 
+    /**
+     * Returns an array for a header for printing to a csv
+     */
     private static final Object[] FILE_HEADER =
             {"article_id","full_name","sex","birth_year","city","state",
                     "country", "continent","latitude","longitude","occupation",
                     "industry","domain","article_languages","page_views",
                     "average_views","historical_popularity_index"};
 
-
+    /**
+     * Writes data in dataset to new csv file
+     * @param filename the name of the file to generate
+     */
     public void write(String filename) {
         CSVFormat csvFileFormat = CSVFormat.DEFAULT.withRecordSeparator("\n");
         try {
@@ -210,28 +255,9 @@ public class PantheonDataSet {
         }
     }
 
-    // needs how many classes, number in each class
-
-    private int article_id;
-    private String full_name;
-    private Set<String> sex;//# of classes
-    private int birth_year;
-    private Set<String> city;
-    private Set<String> state;
-    private Set<String> country;
-    private Set<String> continent;
-    private double latitude;
-    private double longitude;
-    private Set<String> occupation;
-    private Set<String> industry;
-    private Set<String> domain;
-    private int article_languages;
-    private int page_views;
-    private int average_views;
-    private double historical_popularity_index;
-
-    Set<Attribute> attributes;
-
+    public ArrayList<HistoricalFigure> getDataset() {
+        return dataset;
+    }
 }
 
 

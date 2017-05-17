@@ -43,7 +43,8 @@ public class HistoricalFigure {
           this.page_views = builder._page_views;
           this.average_views = builder._average_views;
           this.historical_popularity_index = builder._historical_popularity_index;
-    }
+
+}
 
     public int getArticle_id() {
         return article_id;
