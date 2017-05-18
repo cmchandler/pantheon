@@ -8,72 +8,47 @@ import java.util.List;
  */
 public class Node {
 
-    // The node's parent
-    Node parent;
-
-    // The node's children
+    private String parentAttr;
+    private String classOfParent;
+    private String splitAttribute;
     private ArrayList<Node> children;
-
-    // The node's data set
     private ArrayList<HistoricalFigure> data;
-
-    // The attribute value
-    private Attribute value;
-
     private String name;
 
-    // The features of the data set to compare, MAY NOT NEED
-    private ArrayList<Attribute> attributes;
-
-    public Node(String s){
-        setName(s);
+    public Node(String p, String s, ArrayList<HistoricalFigure> d){
+        setParentAttr(p);
+        setClassOfParent(s);
+        setChildren(null);
+        setSplitAttribute(null);
+        setData(d);
     }
 
     public ArrayList<Node> getChildren() {
         return children;
     }
-
     public void setChildren(ArrayList<Node> children) {
         this.children = children;
     }
-
     public void addChild(Node child){ children.add(child);}
 
     public ArrayList<HistoricalFigure> getData() {
         return data;
     }
-
     public void setData(ArrayList<HistoricalFigure> data) {
         this.data = data;
     }
-
     public void addData(HistoricalFigure fig){data.add(fig);}
 
-    public ArrayList<Attribute> getAttributes() {
-        return attributes;
+    public String getParentAttr() {
+        return parentAttr;
+    }
+    public void setParentAttr(String parent) {
+        this.parentAttr = parent;
     }
 
-    public void setAttributes(ArrayList<Attribute> attributes) {
-        this.attributes = attributes;
-    }
+    public void setClassOfParent(String n) {this.classOfParent = n;}
+    public String getClassOfParent() { return classOfParent;}
 
-    public Attribute getValue() {
-        return value;
-    }
-
-    public Node getParent() {
-        return parent;
-    }
-
-    public void setParent(Node parent) {
-        this.parent = parent;
-    }
-
-    public void setValue(Attribute a) {
-        value = a;
-    }
-
-    public void setName(String n) {this.name = n;}
-
-    public String getName() { return name;}
+    public void setSplitAttribute(String n) {this.splitAttribute = n;}
+    public String getSplitAttribute() { return splitAttribute;}
 }

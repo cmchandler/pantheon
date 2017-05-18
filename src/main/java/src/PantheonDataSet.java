@@ -120,9 +120,9 @@ public class PantheonDataSet {
             String city = dataset.get(i).getCity();
             String country = dataset.get(i).getCountry();
             String continent = dataset.get(i).getContinent();
-            String pageViews = Integer.toString(dataset.get(i).getPage_views());
-            String avgViews = Integer.toString(dataset.get(i).getAverage_views());
-            String langages = Integer.toString(dataset.get(i).getArticle_languages());;
+            String page_views = Integer.toString(dataset.get(i).getPage_views());
+            String avg_views = Integer.toString(dataset.get(i).getAverage_views());
+            String languages = Integer.toString(dataset.get(i).getArticle_languages());;
             String domain = dataset.get(i).getDomain();
             String sex = dataset.get(i).getSex();
             String occupation = dataset.get(i).getOccupation();
@@ -134,11 +134,11 @@ public class PantheonDataSet {
             countryAttr.setName("country");
             continentAttr.add(continent) ;
             continentAttr.setName("continent");
-            pageViewsAttr.add(pageViews) ;
+            pageViewsAttr.add(page_views) ;
             pageViewsAttr.setName("page_views");
-            avgViewsAttr.add(avgViews) ;
+            avgViewsAttr.add(avg_views) ;
             avgViewsAttr.setName("avg_views");
-            languagesAttr.add(langages) ;
+            languagesAttr.add(languages) ;
             languagesAttr.setName("languages");
             domainAttr.add(domain) ;
             domainAttr.setName("domain");

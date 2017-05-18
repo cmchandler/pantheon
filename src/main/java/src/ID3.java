@@ -22,13 +22,25 @@ public class ID3 {
 
     }
 
-    public String query(Node root,HistoricalFigure h) {
-        if(root.getChildren() == null) {
-            return h.getOccupation();
-        }
-        String name = root.getName();
-        String cla = h.getOccupation();
 
+
+    public String query(Node root,HistoricalFigure f) {
+        Node newRoot = root.getChildren().get(0);
+        //if n has no child, return String occupation BASE CASE
+        if(root.getChildren() == null){
+            return root.getClassOfParent();
+        }
+        //Get root's splitting attribute sA
+        //get f's classification c for sA
+        for(int i=0; i<root.getChildren().size(); i++){
+            if(root.getChildren().get(i).getClassOfParent().equals(f.getCustomClass(root.getChildren().get(i).getClassOfParent()))){
+                //get node for c, ni
+                newRoot = root.getChildren().get(i);
+                i = root.getChildren().size() + 1 ;
+            }
+        }
+        //recursively call query on node
+        return query(newRoot, f) ;
     }
 
     /**
@@ -46,11 +58,11 @@ public class ID3 {
 
         //if attributes is empty, return null
         if (attributes.isEmpty()) {
-           return new Node(findMostCommon(root.getData()));
+           return new Node(root.getSplitAttribute(), findMostCommon(root.getData()), null) ;
         }
 
         if(target.getEntropy(root.getData().size())==0) {
-            return new Node(root.getData().get(0).getOccupation());
+            return new Node(root.getSplitAttribute(), root.getData().get(0).getOccupation(), null);
         }
 
         ////////Recursive
@@ -71,7 +83,7 @@ public class ID3 {
         }
 
         ArrayList<Node> children = bestGainAttr.split(root.getData());
-
+        root.setSplitAttribute(bestGainAttr.getName());
         attributes.remove(index);
 
         for(int i = 0; i < children.size(); i++) {

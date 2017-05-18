@@ -114,6 +114,42 @@ public class HistoricalFigure {
         return historical_popularity_index;
     }
 
+    public String getCustomClass(String n){
+        if (n.equals("city")) {
+            return this.getCity() ;
+        }
+        else if(n.equals("country")){
+            return this.getCountry() ;
+        }
+        else if(n.equals("continent")){
+            return this.getContinent() ;
+        }
+        else if(n.equals("page_views")){
+            return Integer.toString(this.getPage_views()) ;
+        }
+        else if(n.equals("avg_views")){
+            return Integer.toString(this.getAverage_views()) ;
+        }
+        else if(n.equals("languages")){
+            return Integer.toString(this.getArticle_languages()) ;
+        }
+        else if(n.equals("domain")){
+            return this.getDomain() ;
+        }
+        else if(n.equals("sex")){
+            return this.getSex() ;
+        }
+        else if(n.equals("occupation")){
+            return this.getOccupation() ;
+        }
+        else if(n.equals("industry")){
+            return this.getIndustry() ;
+        }
+        else{
+            return "";
+        }
+    }
+
     /**
      * Constructs a HistoricalFigure
      */
