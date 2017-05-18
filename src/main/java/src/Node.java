@@ -17,24 +17,46 @@ public class Node {
     // The node's data set
     private ArrayList<HistoricalFigure> data;
 
-    // The features of the data set to compare, MAY NOT NEED
-    private ArrayList<Attribute> attributes;
-
     // The attribute value
     private Attribute value;
 
-    /**
-     * The constructor for the Node
-     * @param parent the parent of the Node in the tree
-     * @param data
-     */
-    public Node(Node parent, ArrayList<HistoricalFigure> data) {
-        this.parent = parent;
+    // The features of the data set to compare, MAY NOT NEED
+    private ArrayList<Attribute> attributes;
+
+    public ArrayList<Node> getChildren() {
+        return children;
+    }
+
+    public void setChildren(ArrayList<Node> children) {
+        this.children = children;
+    }
+
+    public ArrayList<HistoricalFigure> getData() {
+        return data;
+    }
+
+    public void setData(ArrayList<HistoricalFigure> data) {
         this.data = data;
     }
 
-    public Node(Attribute value) {
-        this.value = value;
+    public ArrayList<Attribute> getAttributes() {
+        return attributes;
+    }
+
+    public void setAttributes(ArrayList<Attribute> attributes) {
+        this.attributes = attributes;
+    }
+
+    public Attribute getValue() {
+        return value;
+    }
+
+    public Node getParent() {
+        return parent;
+    }
+
+    public void setParent(Node parent) {
+        this.parent = parent;
     }
 
     public void setValue(Attribute a) {

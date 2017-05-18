@@ -54,8 +54,8 @@ public class Attribute {
             String kei = (String) entry.getKey() ;
             Integer numberInClass = (Integer) entry.getValue();
 
-            System.out.println("Key: " + kei);
-            System.out.println("Val: " + numberInClass);
+           // System.out.println("Key: " + kei);
+           // System.out.println("Val: " + numberInClass);
 
             double num = numberInClass.doubleValue();
 
@@ -72,7 +72,7 @@ public class Attribute {
             //System.out.println("Total people: " + (double) totalPeople);
             //System.out.println("Result: " + result);
         }
-        System.out.println(result);
+        //System.out.println(result);
         return result;
     }
 
@@ -82,6 +82,26 @@ public class Attribute {
     public double getInfoGain() {
         return 0.0;
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String n) {
+        name = n;
+    }
+
+    //#########################################################################################################
+    //# This needs to return a list of nodes that contain the Historical Figures with the same classification #
+    //#########################################################################################################
+    public ArrayList<Node> split(ArrayList<HistoricalFigure> data) {
+        ArrayList<Node> retNodes = new ArrayList<>();
+        for(int i = 0; i < data.size(); i++) {
+
+        }
+        return null;
+    }
+
 }
 
 

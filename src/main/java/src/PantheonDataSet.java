@@ -129,15 +129,25 @@ public class PantheonDataSet {
             String industry = dataset.get(i).getIndustry();
 
             cityAttr.add(city) ;
+            cityAttr.setName("city");
             countryAttr.add(country) ;
+            countryAttr.setName("country");
             continentAttr.add(continent) ;
+            continentAttr.setName("continent");
             pageViewsAttr.add(pageViews) ;
+            pageViewsAttr.setName("page_views");
             avgViewsAttr.add(avgViews) ;
+            avgViewsAttr.setName("avg_views");
             languagesAttr.add(langages) ;
+            languagesAttr.setName("languages");
             domainAttr.add(domain) ;
+            domainAttr.setName("domain");
             sexAttr.add(sex) ;
+            sexAttr.add("sex");
             occupationAttr.add(occupation) ;
+            occupationAttr.setName("occupation");
             industryAttr.add(industry) ;
+            industryAttr.setName("industry");
         }
 
         attributeList = new ArrayList<>();
@@ -159,8 +169,11 @@ public class PantheonDataSet {
         //#####################################################################################
 
         for(int i = 0; i < attributeList.size()-1;i++) {
-            System.out.print("Info gain: ");
-            ID3.getGain(attributeList.get(i),occupationAttr,dataset.size());
+            System.out.print("Info gain from ");
+            System.out.print(attributeList.get(i).getName());
+            System.out.println(": ");
+            double test = ID3.getGain(attributeList.get(i),occupationAttr,dataset.size());
+            System.out.print(test);
             System.out.print("\n");
         }
     }

@@ -25,7 +25,7 @@ public class ID3 {
 
         // if attributes is empty, return null
         if (attributes.isEmpty()) {
-            return new Node(null);
+            return new Node();
         }
 
         //################### HARDCODING OCCUPATION ###########################
@@ -36,7 +36,7 @@ public class ID3 {
 
         for (int i = 0; i < data.size(); i++) {
             if(data.get(i).getOccupation().equals(occupation)) {
-               // return new Node();
+
             }
         }
 
