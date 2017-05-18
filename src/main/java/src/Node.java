@@ -20,8 +20,14 @@ public class Node {
     // The attribute value
     private Attribute value;
 
+    private String name;
+
     // The features of the data set to compare, MAY NOT NEED
     private ArrayList<Attribute> attributes;
+
+    public Node(String s){
+        setName(s);
+    }
 
     public ArrayList<Node> getChildren() {
         return children;
@@ -31,6 +37,8 @@ public class Node {
         this.children = children;
     }
 
+    public void addChild(Node child){ children.add(child);}
+
     public ArrayList<HistoricalFigure> getData() {
         return data;
     }
@@ -38,6 +46,8 @@ public class Node {
     public void setData(ArrayList<HistoricalFigure> data) {
         this.data = data;
     }
+
+    public void addData(HistoricalFigure fig){data.add(fig);}
 
     public ArrayList<Attribute> getAttributes() {
         return attributes;
@@ -62,4 +72,8 @@ public class Node {
     public void setValue(Attribute a) {
         value = a;
     }
+
+    public void setName(String n) {this.name = n;}
+
+    public String getName() { return name;}
 }

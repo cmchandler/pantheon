@@ -79,8 +79,11 @@ public class Attribute {
     /**
      * Calculates information gain
      */
-    public double getInfoGain() {
-        return 0.0;
+    public double getInfoGain(double targetEntropy, int totalPeople) {
+        double result = 0.0;
+        double temp = this.getEntropy(totalPeople);
+        result = temp - targetEntropy ;
+        return result;
     }
 
     public String getName() {
@@ -91,15 +94,63 @@ public class Attribute {
         name = n;
     }
 
+    public String getHistFigureClass(HistoricalFigure data){
+        String n = this.getName() ;
+        if (n.equals("city")) {
+            return data.getCity() ;
+        }
+        else if(n.equals("country")){
+            return data.getCountry() ;
+        }
+        else if(n.equals("continent")){
+            return data.getContinent() ;
+        }
+        else if(n.equals("page_views")){
+            return Integer.toString(data.getPage_views()) ;
+        }
+        else if(n.equals("avg_views")){
+            return Integer.toString(data.getAverage_views()) ;
+        }
+        else if(n.equals("languages")){
+            return Integer.toString(data.getArticle_languages()) ;
+        }
+        else if(n.equals("domain")){
+            return data.getDomain() ;
+        }
+        else if(n.equals("sex")){
+            return data.getSex() ;
+        }
+        else if(n.equals("occupation")){
+            return data.getOccupation() ;
+        }
+        else if(n.equals("industry")){
+            return data.getIndustry() ;
+        }
+        else{
+            return "";
+        }
+    }
+
     //#########################################################################################################
     //# This needs to return a list of nodes that contain the Historical Figures with the same classification #
     //#########################################################################################################
     public ArrayList<Node> split(ArrayList<HistoricalFigure> data) {
         ArrayList<Node> retNodes = new ArrayList<>();
-        for(int i = 0; i < data.size(); i++) {
-
+        for(Map.Entry<String, Integer> entry : classifications.entrySet()) {
+            String key = (String) entry.getKey() ;
+            Node temp = new Node(key) ;
+            retNodes.add(temp) ;
         }
-        return null;
+
+        for(int i = 0; i < data.size(); i++) {
+            for(int j=0; j<retNodes.size(); j++){
+                String temp = getHistFigureClass(data.get(i)) ;
+                if(temp.equals(retNodes.get(j).getName())){
+                    retNodes.get(j).addData(data.get(i));
+                }
+            }
+        }
+        return retNodes;
     }
 
 }
