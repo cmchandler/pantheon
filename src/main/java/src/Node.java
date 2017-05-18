@@ -8,9 +8,6 @@ import java.util.List;
  */
 public class Node {
 
-    // The node's parent
-    Node parent;
-
     // The node's children
     private ArrayList<Node> children;
 
@@ -59,14 +56,6 @@ public class Node {
 
     public Attribute getValue() {
         return value;
-    }
-
-    public Node getParent() {
-        return parent;
-    }
-
-    public void setParent(Node parent) {
-        this.parent = parent;
     }
 
     public void setValue(Attribute a) {

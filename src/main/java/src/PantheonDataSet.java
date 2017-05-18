@@ -120,9 +120,46 @@ public class PantheonDataSet {
             String city = dataset.get(i).getCity();
             String country = dataset.get(i).getCountry();
             String continent = dataset.get(i).getContinent();
-            String pageViews = Integer.toString(dataset.get(i).getPage_views());
-            String avgViews = Integer.toString(dataset.get(i).getAverage_views());
-            String langages = Integer.toString(dataset.get(i).getArticle_languages());;
+
+            //String pageViews = Integer.toString(dataset.get(i).getPage_views());
+            //String avgViews = Integer.toString(dataset.get(i).getAverage_views());
+            //String langages = Integer.toString(dataset.get(i).getArticle_languages());;
+
+            // Make values discrete by hand
+
+            String pageViews;
+            if(dataset.get(i).getPage_views() > 1000000) {
+                pageViews = "high";
+            }
+            else if(dataset.get(i).getPage_views() > 1000000) {
+                pageViews = "medium";
+            }
+            else {
+                pageViews = "low";
+            }
+
+            String avgViews;
+            if(dataset.get(i).getAverage_views() > 1000000) {
+                avgViews = "high";
+            }
+            else if(dataset.get(i).getAverage_views() > 1000000) {
+                avgViews = "medium";
+            }
+            else {
+                avgViews = "low";
+            }
+
+            String langages;
+            if(dataset.get(i).getArticle_languages() > 90) {
+                langages = "high";
+            }
+            else if(dataset.get(i).getArticle_languages() > 50) {
+                langages = "medium";
+            }
+            else {
+                langages = "low";
+            }
+
             String domain = dataset.get(i).getDomain();
             String sex = dataset.get(i).getSex();
             String occupation = dataset.get(i).getOccupation();
@@ -167,15 +204,16 @@ public class PantheonDataSet {
         //#####################################################################################
         target = occupationAttr;
         //#####################################################################################
-
+        /*
         for(int i = 0; i < attributeList.size()-1;i++) {
-            System.out.print("Info gain from ");
-            System.out.print(attributeList.get(i).getName());
-            System.out.println(": ");
-            double test = ID3.getGain(attributeList.get(i),occupationAttr,dataset.size());
-            System.out.print(test);
-            System.out.print("\n");
+          //  System.out.print("Info gain from ");
+           // System.out.print(attributeList.get(i).getName());
+            //System.out.println(": ");
+            //double test = ID3.getGain(attributeList.get(i),occupationAttr,dataset.size());
+           System.out.print(test);
+           System.out.print("\n");
         }
+        */
     }
 
     /**
@@ -227,7 +265,7 @@ public class PantheonDataSet {
      */
     public HistoricalFigure find(String name) {
         for (int i = 0; i < dataset.size(); i++) {
-            if(dataset.get(i).getFull_name().equals(name)) {
+            if(dataset.get(i).getFull_name().equalsIgnoreCase(name)) {
                 return dataset.get(i);
             }
         }
@@ -271,6 +309,8 @@ public class PantheonDataSet {
     public ArrayList<HistoricalFigure> getDataset() {
         return dataset;
     }
+
+
 }
 
 

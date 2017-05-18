@@ -23,12 +23,12 @@ public class ID3 {
     }
 
     public String query(Node root,HistoricalFigure h) {
-        if(root.getChildren() == null) {
+        if(root.getChildren().size() == 0) {
             return h.getOccupation();
         }
         String name = root.getName();
         String cla = h.getOccupation();
-
+        return null;
     }
 
     /**

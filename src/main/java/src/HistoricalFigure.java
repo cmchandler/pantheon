@@ -45,6 +45,17 @@ public class HistoricalFigure {
           this.historical_popularity_index = builder._historical_popularity_index;
 
 }
+    public void setPage_views(int p) {
+        page_views = p;
+    }
+
+    public void setArticle_languages(int l) {
+        article_languages = l;
+    }
+
+    public void setAverage_views(int a) {
+        average_views = a;
+    }
 
     public int getArticle_id() {
         return article_id;
