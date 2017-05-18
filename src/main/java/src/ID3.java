@@ -20,7 +20,13 @@ public class ID3 {
 
     }
 
-
+    /**
+     * Recursive branching method to deconstruct dataset
+     * @param attributes the list of attributes to still consider
+     * @param target the attribute we're looking for
+     * @param data the current dataset
+     * @return a node containing single
+     */
     public Node branch(ArrayList<Attribute> attributes, Attribute target, ArrayList<HistoricalFigure> data ){
 
         // if attributes is empty, return null
@@ -35,8 +41,9 @@ public class ID3 {
         String occupation = data.get(0).getOccupation();
 
         for (int i = 0; i < data.size(); i++) {
-            if(data.get(i).getOccupation().equals(occupation)) {
-
+            if(!data.get(i).getOccupation().equals(occupation)) {
+                Node temp = new Node();
+                temp.
             }
         }
 
