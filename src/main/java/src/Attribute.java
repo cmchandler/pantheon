@@ -138,14 +138,14 @@ public class Attribute {
         ArrayList<Node> retNodes = new ArrayList<>();
         for(Map.Entry<String, Integer> entry : classifications.entrySet()) {
             String key = (String) entry.getKey() ;
-            Node temp = new Node(key) ;
+            Node temp = new Node(this.getName(), key, data) ;
             retNodes.add(temp) ;
         }
 
         for(int i = 0; i < data.size(); i++) {
             for(int j=0; j<retNodes.size(); j++){
                 String temp = getHistFigureClass(data.get(i)) ;
-                if(temp.equals(retNodes.get(j).getName())){
+                if(temp.equals(retNodes.get(j).getClassOfParent())){
                     retNodes.get(j).addData(data.get(i));
                 }
             }
