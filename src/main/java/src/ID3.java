@@ -1,7 +1,9 @@
 package main.java.src;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by chris on 5/16/2017.
@@ -20,36 +22,63 @@ public class ID3 {
 
     }
 
+    public String query(Node root,HistoricalFigure h) {
+        if(root.getChildren() == null) {
+            return h.getOccupation();
+        }
+        String name = root.getName();
+        String cla = h.getOccupation();
+
+    }
+
     /**
      * Recursive branching method to deconstruct dataset
      * @param attributes the list of attributes to still consider
      * @param target the attribute we're looking for
-     * @param data the current dataset
+     * @param root the root node
      * @return a node containing single
      */
-    public Node branch(ArrayList<Attribute> attributes, Attribute target, ArrayList<HistoricalFigure> data ){
+    public Node branch(ArrayList<Attribute> attributes, Attribute target, Node root){
 
-        // if attributes is empty, return null
+        double targetEntropy = target.getEntropy(root.getData().size());
+
+        /////////Base cases
+
+        //if attributes is empty, return null
         if (attributes.isEmpty()) {
-            return new Node();
+           return new Node(findMostCommon(root.getData()));
         }
 
-        //################### HARDCODING OCCUPATION ###########################
-        // if all members of data have the same value for target attribute, return new node with that value
+        if(target.getEntropy(root.getData().size())==0) {
+            return new Node(root.getData().get(0).getOccupation());
+        }
 
-        Boolean same = false;
-        String occupation = data.get(0).getOccupation();
+        ////////Recursive
 
-        for (int i = 0; i < data.size(); i++) {
-            if(!data.get(i).getOccupation().equals(occupation)) {
-                Node temp = new Node();
-                temp.
+        Attribute bestGainAttr = attributes.get(0);
+
+        double bestGain = -5.0;
+        double temp;
+        int index = 0;
+
+        for(int i = 0; i < attributes.size(); i++){
+            temp = attributes.get(i).getInfoGain(targetEntropy,root.getData().size());
+            if(temp > bestGain) {
+                bestGain = temp;
+                bestGainAttr = attributes.get(i);
+                index = i;
             }
         }
 
+        ArrayList<Node> children = bestGainAttr.split(root.getData());
 
-        // if attributes is empty, return a node with the value of the most frequent value of target in data
-    return null;
+        attributes.remove(index);
+
+        for(int i = 0; i < children.size(); i++) {
+            root.addChild(branch(attributes,target,children.get(i)));
+        }
+
+        return root;
     }
 
     /**
@@ -61,6 +90,32 @@ public class ID3 {
      */
     public static double getGain(Attribute a, Attribute t, Integer n) {
         return t.getEntropy(n) - a.getEntropy(n);
+    }
+
+    public String findMostCommon(ArrayList<HistoricalFigure> a){
+        String retVal = "";
+        for(int i = 0;i<a.size();i++) {
+            HashMap<String,Integer> map = new HashMap<>();
+            if(!map.containsValue(a.get(i))) {
+                map.put(a.get(i).getOccupation(),1);
+            }
+            else {
+                Integer temp = map.get(a.get(i).getOccupation());
+                map.put(a.get(i).getOccupation(),temp+1);
+            }
+
+            int max = 0;
+
+            for(Map.Entry<String, Integer> entry : map.entrySet()){
+                int temp = entry.getValue();
+                if(temp>max){
+                    max = temp;
+                    retVal = entry.getKey();
+                }
+            }
+
+        }
+        return retVal;
     }
 
 }
