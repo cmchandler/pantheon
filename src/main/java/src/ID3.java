@@ -25,22 +25,22 @@ public class ID3 {
 
 
     public String query(Node root,HistoricalFigure f) {
-        Node newRoot = root.getChildren().get(0);
         //if n has no child, return String occupation BASE CASE
-        if(root.getChildren() == null){
+        if(root.getChildren().isEmpty()){
             return root.getClassOfParent();
         }
         //Get root's splitting attribute sA
         //get f's classification c for sA
+        System.out.println("Size: " + root.getChildren().size());
         for(int i=0; i<root.getChildren().size(); i++){
             if(root.getChildren().get(i).getClassOfParent().equals(f.getCustomClass(root.getChildren().get(i).getClassOfParent()))){
                 //get node for c, ni
-                newRoot = root.getChildren().get(i);
-                i = root.getChildren().size() + 1 ;
+                root = root.getChildren().get(i);
+                return query(root, f) ;
             }
         }
         //recursively call query on node
-        return query(newRoot, f) ;
+        return query(root, f) ;
     }
 
     /**
@@ -54,17 +54,21 @@ public class ID3 {
 
         double targetEntropy = target.getEntropy(root.getData().size());
 
+        System.out.println("Init. node");
         /////////Base cases
 
         //if attributes is empty, return null
-        if (attributes.isEmpty()) {
+        if (attributes.size() == 1) {
+            System.out.println("Bail case 1");
+            System.out.println("Split attribute passed: " + root.getSplitAttribute());
            return new Node(root.getSplitAttribute(), findMostCommon(root.getData()), null) ;
         }
 
         if(target.getEntropy(root.getData().size())==0) {
+            System.out.println("Bail case 2: ");
             return new Node(root.getSplitAttribute(), root.getData().get(0).getOccupation(), null);
         }
-
+        System.out.println("Past the ifs");
         ////////Recursive
 
         Attribute bestGainAttr = attributes.get(0);
@@ -82,12 +86,30 @@ public class ID3 {
             }
         }
 
+        //System.out.println("Past the check");
+
+        //System.out.println("Data going to split size" + root.getData().size());
         ArrayList<Node> children = bestGainAttr.split(root.getData());
-        root.setSplitAttribute(bestGainAttr.getName());
-        attributes.remove(index);
 
         for(int i = 0; i < children.size(); i++) {
+            if(children.get(i) == null) children.remove(i);
+        }
+
+        //System.out.println("Setting gain attr with name " + bestGainAttr.getName());
+        if(bestGainAttr.getName()==null) bestGainAttr.setName("");
+        root.setSplitAttribute(bestGainAttr.getName());
+
+        attributes.remove(index);
+
+        //System.out.println("Past the split");
+
+        for(int i = 0; i < children.size(); i++) {
+            System.out.println("Start recursion: ");
+            System.out.println("Attributes :" + attributes.size());
+            System.out.println("Target: " + target.getName());
+            System.out.println("Children: " + children.get(i).getSplitAttribute());
             root.addChild(branch(attributes,target,children.get(i)));
+            //root.addChild(children.get(i));
         }
 
         return root;
