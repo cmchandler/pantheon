@@ -8,7 +8,7 @@ import java.util.List;
  */
 public class Node {
 
-    private String parentAttr;
+    private Attribute parentAttr;
     private String classOfParent;
     private String splitAttribute;
     private ArrayList<Node> children;
@@ -16,11 +16,15 @@ public class Node {
     private String name;
 
     public Node(String p, String s, ArrayList<HistoricalFigure> d){
+        System.out.println("New node.");
+        System.out.println("Node has parent attribute of " + s);
+        System.out.println("Node has parent class of " + s);
         setParentAttr(p);
         setClassOfParent(s);
-        setChildren(null);
-        setSplitAttribute(null);
+        setChildren(new ArrayList());
+        //setSplitAttribute("city");
         setData(d);
+        System.out.println("Finished constructing");
     }
 
     public ArrayList<Node> getChildren() {
@@ -29,7 +33,8 @@ public class Node {
     public void setChildren(ArrayList<Node> children) {
         this.children = children;
     }
-    public void addChild(Node child){ children.add(child);}
+
+    public void addChild(Node child){children.add(child);}
 
     public ArrayList<HistoricalFigure> getData() {
         return data;
