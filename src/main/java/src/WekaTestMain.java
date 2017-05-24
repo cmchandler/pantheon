@@ -13,25 +13,21 @@ public class WekaTestMain {
 
         // Load file
         System.out.println("Loading...");
-        PantheonDataSet p = new PantheonDataSet("");
+        PantheonDataSet p = new PantheonDataSet("training.csv");
         System.out.println("Loaded " + p.getNumberOfRecords() + " records.");
 
         // Split file
         System.out.println("Splitting...");
-        PantheonDataSet t = p.splitTestData();
+        PantheonDataSet t = new PantheonDataSet("test.csv");
         System.out.println("Dataset contains " + p.getNumberOfRecords() + " records.");
         System.out.println("Test data set contains " + t.getNumberOfRecords() + " records.");
-        System.out.println("Writing Training set to file...");
-        p.write("training.csv");
-        System.out.println("Writing Test set to file...");
-        t.write("test.csv");
 
         // Evaluate
         System.out.println("Evaluating for metric L.");
         WekaData training = new WekaData();
-        training.readFile("main/java/training.csv", 13);
+        training.readFile("main/java/training.csv", 10);
         WekaData test = new WekaData();
-        test.readFile("main/java/test.csv", 13);
+        test.readFile("main/java/test.csv", 10);
 
         System.out.println("Running...\n");
         WekaTree mine = new WekaTree(training,test);

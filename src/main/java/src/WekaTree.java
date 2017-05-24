@@ -2,7 +2,9 @@ package main.java.src;
 
 import weka.classifiers.Classifier;
 import weka.classifiers.Evaluation;
+import weka.classifiers.bayes.NaiveBayes;
 import weka.classifiers.meta.FilteredClassifier;
+import weka.classifiers.trees.J48;
 import weka.classifiers.trees.M5P;
 import weka.classifiers.trees.REPTree;
 import weka.filters.unsupervised.attribute.Remove;
@@ -17,9 +19,10 @@ public class WekaTree {
     public WekaTree(WekaData training, WekaData test) {
 
         // Command line options for tree
-        String OPTIONS = "-M 2 -V 0.001 -N 3 -S 1 -L -1 -I 0.0";
+        //String OPTIONS = "-C 0.25 -M 2";
+        //String OPTIONS = "-M 2 -V 0.001 -N 3 -S 1 -L -1 -I 0.0";
         //String OPTIONS = "-M 4.0";
-        int[] removeme = {0,1,1,0,0,1,1,0,0,0,0,0,0,0,0,1,1,1};
+        int[] removeme = {0,1,0,1,0,0,0,0,1,1,0,0,0,0,0,1,1};
 
         boolean first = false;
 
@@ -34,9 +37,11 @@ public class WekaTree {
             }
 
 
-            String[] options = weka.core.Utils.splitOptions(OPTIONS);
+          //  String[] options = weka.core.Utils.splitOptions(OPTIONS);
 
-            REPTree cls = new REPTree();
+            //J48 cls = new J48();
+            NaiveBayes cls = new NaiveBayes();
+            // REPTree cls = new REPTree();
            // M5P cls = new M5P();
            // cls.setOptions(options);
 

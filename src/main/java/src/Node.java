@@ -9,22 +9,23 @@ import java.util.List;
 public class Node {
 
     private Attribute parentAttr;
-    private String classOfParent;
-    private String splitAttribute;
+    private String classOfParent = "";
+    private Attribute splitAttribute;
     private ArrayList<Node> children;
     private ArrayList<HistoricalFigure> data;
-    private String name;
 
-    public Node(String p, String s, ArrayList<HistoricalFigure> d){
-        System.out.println("New node.");
-        System.out.println("Node has parent attribute of " + s);
-        System.out.println("Node has parent class of " + s);
-        setParentAttr(p);
-        setClassOfParent(s);
+    public Node(Attribute parentAttribute, String parentClassName, ArrayList<HistoricalFigure> d) {
+
+        setParentAttr(parentAttribute);
+
+        setClassOfParent("empty");
+
         setChildren(new ArrayList());
-        //setSplitAttribute("city");
+
         setData(d);
-        System.out.println("Finished constructing");
+
+        setSplitAttribute(new Attribute());
+
     }
 
     public ArrayList<Node> getChildren() {
@@ -44,16 +45,16 @@ public class Node {
     }
     public void addData(HistoricalFigure fig){data.add(fig);}
 
-    public String getParentAttr() {
+    public Attribute getParentAttr() {
         return parentAttr;
     }
-    public void setParentAttr(String parent) {
+    public void setParentAttr(Attribute parent) {
         this.parentAttr = parent;
     }
 
     public void setClassOfParent(String n) {this.classOfParent = n;}
     public String getClassOfParent() { return classOfParent;}
 
-    public void setSplitAttribute(String n) {this.splitAttribute = n;}
-    public String getSplitAttribute() { return splitAttribute;}
+    public void setSplitAttribute(Attribute n) {this.splitAttribute = n;}
+    public Attribute getSplitAttribute() { return splitAttribute;}
 }

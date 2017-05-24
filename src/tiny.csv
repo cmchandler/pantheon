@@ -1,5 +1,5 @@
 article_id,full_name,sex,birth_year,city,state,country,continent,latitude,longitude,occupation,industry,domain,article_languages,page_views,average_views,historical_popularity_index
-15192,Isaac,Male,-3500,Canaan,,Israel,Asia,0.0,0.0,Religious Figure,Religion,Institutions,62,4778973,77080,0.0
-22481,Otho,Male,32,Viterbo,,Italy,Europe,0.0,0.0,Politician,Government,Institutions,56,1391145,24842,0.0
-1937,Alexander Fleming,Male,1881,Lochfield,,United Kingdom,Europe,0.0,0.0,Biologist,Natural Sciences,Science & Technology,81,9383477,115845,0.0
-555313,Manetho,Male,-300,Other,,Egypt,Africa,0.0,0.0,Historian,History,Humanities,46,685489,14902,0.0
+15192,Isaac,Male,-3500,Canaan,asdad,Israel,Asia,0.0,0.0,Religious Figure,Religion,Institutions,62,4778973,77080,0.0
+22481,Otho,Male,32,Viterbo,Rome,Italy,Europe,0.0,0.0,Politician,Government,Institutions,56,1391145,24842,0.0
+1937,Alexander Fleming,Male,1881,Lochfield,asddad,United Kingdom,Europe,0.0,0.0,Biologist,Natural Sciences,Science & Technology,81,9383477,115845,0.0
+555313,Manetho,Male,-300,Other,aasd,Egypt,Africa,0.0,0.0,Historian,History,Humanities,46,685489,14902,0.0

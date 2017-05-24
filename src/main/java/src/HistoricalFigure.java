@@ -126,6 +126,8 @@ public class HistoricalFigure {
     }
 
     public String getCustomClass(String n){
+        if(n == null) n = "";;
+
         if (n.equals("city")) {
             return this.getCity() ;
         }

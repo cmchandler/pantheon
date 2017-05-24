@@ -1,5 +1,7 @@
 package main.java.src;
 
+import weka.core.pmml.Array;
+
 import java.util.*;
 
 
@@ -96,6 +98,10 @@ public class Attribute {
 
     public String getHistFigureClass(HistoricalFigure data){
         String n = this.getName() ;
+        if(n == null) {
+            n = "";
+        }
+
         if (n.equals("city")) {
             return data.getCity() ;
         }
@@ -135,14 +141,29 @@ public class Attribute {
     //# This needs to return a list of nodes that contain the Historical Figures with the same classification #
     //#########################################################################################################
     public ArrayList<Node> split(ArrayList<HistoricalFigure> data) {
+
+        if(data==null) return new ArrayList<>();
+        if(this.name==null) return new ArrayList<>();
+
+        System.out.print("\nSplit on " + name);
+        System.out.print("\t");
+
+        int size = data.size();
+
+
         ArrayList<Node> retNodes = new ArrayList<>();
+
         for(Map.Entry<String, Integer> entry : classifications.entrySet()) {
-            String key = (String) entry.getKey() ;
-            Node temp = new Node(this.getName(), key, data) ;
-            retNodes.add(temp) ;
+            ArrayList<HistoricalFigure> newList = new ArrayList<>() ;
+            String key = entry.getKey() ;
+            Node temp = new Node(this, key, newList) ;
+            System.out.println("Key: " + key);
+            if(key != null){
+                retNodes.add(temp) ;
+            }
         }
 
-        for(int i = 0; i < data.size(); i++) {
+        for(int i = 0; i < size; i++) {
             for(int j=0; j<retNodes.size(); j++){
                 String temp = getHistFigureClass(data.get(i)) ;
                 if(temp.equals(retNodes.get(j).getClassOfParent())){
@@ -150,6 +171,7 @@ public class Attribute {
                 }
             }
         }
+
         return retNodes;
     }
 

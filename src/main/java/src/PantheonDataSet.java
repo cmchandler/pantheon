@@ -28,7 +28,7 @@ public class PantheonDataSet {
     private int numberOfRecords;
 
     ArrayList<Attribute> attributeList;
-    Attribute target;
+    public static Attribute target;
     /**
      * Constructor if you already have a dataset
      * @param d the data to add
@@ -115,7 +115,9 @@ public class PantheonDataSet {
         Attribute occupationAttr = new Attribute();
         Attribute industryAttr = new Attribute();
 
-        for(int i = 0; i < dataset.size()-1;i++) {//each person
+        ArrayList<Integer> toRemove = new ArrayList<>();
+
+        for(int i = 0; i < dataset.size();i++) {//each person
 
             String city = dataset.get(i).getCity();
             String country = dataset.get(i).getCountry();
@@ -131,6 +133,7 @@ public class PantheonDataSet {
             if(dataset.get(i).getPage_views() > 1000000) {
                 pageViews = "high";
             }
+
             else if(dataset.get(i).getPage_views() > 1000000) {
                 pageViews = "medium";
             }
@@ -165,18 +168,30 @@ public class PantheonDataSet {
             String occupation = dataset.get(i).getOccupation();
             String industry = dataset.get(i).getIndustry();
 
+            // check for emptystrings or nulls
+            if(city.equals("") || city.equals(null)) toRemove.add(i);
+            else if(country.equals("") || country.equals(null)) toRemove.add(i);
+            else if(continent.equals("") || continent.equals(null)) toRemove.add(i);
+            else if(pageViews.equals("") || pageViews.equals(null)) toRemove.add(i);
+            else if(avgViews.equals("") || avgViews.equals(null)) toRemove.add(i);
+            else if(langages.equals("") || langages.equals(null)) toRemove.add(i);
+            else if(domain.equals("") || domain.equals(null)) toRemove.add(i);
+            else if(sex.equals("") || sex.equals(null)) toRemove.add(i);
+            else if(occupation.equals("") || occupation.equals(null)) toRemove.add(i);
+            else if(industry.equals("") || industry.equals(null)) toRemove.add(i);
+
             cityAttr.add(city) ;
             cityAttr.setName("city");
             countryAttr.add(country) ;
             countryAttr.setName("country");
             continentAttr.add(continent) ;
             continentAttr.setName("continent");
-            pageViewsAttr.add(pageViews) ;
-            pageViewsAttr.setName("page_views");
-            avgViewsAttr.add(avgViews) ;
-            avgViewsAttr.setName("avg_views");
-            languagesAttr.add(langages) ;
-            languagesAttr.setName("languages");
+      //      pageViewsAttr.add(pageViews) ;
+      //      pageViewsAttr.setName("page_views");
+      //      avgViewsAttr.add(avgViews) ;
+      //      avgViewsAttr.setName("avg_views");
+      //      languagesAttr.add(langages) ;
+      //      languagesAttr.setName("languages");
             domainAttr.add(domain) ;
             domainAttr.setName("domain");
             sexAttr.add(sex) ;
@@ -187,17 +202,25 @@ public class PantheonDataSet {
             industryAttr.setName("industry");
         }
 
+        for(int i = toRemove.size()-1; i >=0; i--) {
+            dataset.remove(toRemove.get(i));
+        }
+
         attributeList = new ArrayList<>();
         attributeList.add(cityAttr);
         attributeList.add(countryAttr);
         attributeList.add(continentAttr);
-        attributeList.add(pageViewsAttr);
-        attributeList.add(avgViewsAttr);
-        attributeList.add(languagesAttr);
+       // attributeList.add(pageViewsAttr);
+       // attributeList.add(avgViewsAttr);
+       // attributeList.add(languagesAttr);
         attributeList.add(domainAttr);
-        attributeList.add(sexAttr);
-        attributeList.add(occupationAttr);
+    //    attributeList.add(sexAttr);
+       // attributeList.add(occupationAttr);
         attributeList.add(industryAttr);
+
+        for(int i = 0; i < attributeList.size();i++) {
+            System.out.println("Attributes from data set class: " + attributeList.get(i).getName());
+        }
 
         //industryAttr.getEntropy(dataset.size());
 
@@ -235,27 +258,6 @@ public class PantheonDataSet {
      */
     public ArrayList<Attribute> getAttributes() {
         return attributeList;
-    }
-
-    /**
-     * Splits the data randomly into 3/10 and returns the test data.  Removes these records from the object.
-     * @return the PantheonDataSet containing all of the randomly selected records.
-     */
-    public PantheonDataSet splitTestData() {
-
-        Random r = new Random(System.currentTimeMillis());
-
-        ArrayList<HistoricalFigure> testData = new ArrayList<>();
-
-        for(int i = 0; i < dataset.size(); i++) {
-            if(r.nextInt(9)>6) {
-                testData.add(dataset.get(i));
-                dataset.remove(i);
-            }
-        }
-        numberOfRecords = dataset.size();
-
-        return new PantheonDataSet(testData);
     }
 
     /**
